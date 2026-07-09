@@ -372,17 +372,111 @@ button {
 }
 
 .session-controls .btn-primary {
-  order: -1;
   background: rgba(255, 255, 255, 0.92);
   color: #0f172a;
 }
 
 .session-controls .btn-ghost {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.session-controls-row {
+  display: flex;
+  gap: 10px;
+}
+
+.session-controls-row .hold-btn {
+  flex: 1;
+}
+
+.hold-note {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.78rem;
+  text-align: center;
+  margin-top: 2px;
+  line-height: 1.35;
+}
+
+/* Hold-to-activate button */
+.hold-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.hold-fill {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform-origin: left center;
+  transform: scaleX(0);
+  background: rgba(52, 211, 153, 0.55);
+}
+
+.hold-btn.is-holding .hold-fill {
+  transform: scaleX(1);
+  transition: transform var(--hold-ms, 650ms) linear;
+}
+
+.hold-btn.btn-primary .hold-fill {
+  background: rgba(5, 150, 105, 0.35);
+}
+
+.hold-label {
+  position: relative;
+  z-index: 1;
 }
 
 .finished-title {
   font-size: 4rem;
+}
+
+/* ---------- Advice ---------- */
+
+.advice-intro {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.advice-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.advice-icon {
+  font-size: 1.2rem;
+}
+
+.advice-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.advice-list li {
+  position: relative;
+  padding-left: 20px;
+  color: var(--text);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.advice-list li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 
 /* ---------- History ---------- */

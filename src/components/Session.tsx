@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import type { SessionDef } from '../program'
 import type { ActiveSessionSnapshot, Settings } from '../store'
 import type { Strings } from '../i18n'
 import { formatClock } from '../i18n'
 import { useSessionEngine } from '../hooks/useSessionEngine'
 import { useWakeLock } from '../hooks/useWakeLock'
+import { HoldButton } from './HoldButton'
 
 interface Props {
   session: SessionDef
@@ -34,13 +35,6 @@ export function SessionScreen(props: Props) {
 
   useWakeLock(!engine.finished)
 
-  const [confirmingEnd, setConfirmingEnd] = useState(false)
-  useEffect(() => {
-    if (!confirmingEnd) return
-    const id = setTimeout(() => setConfirmingEnd(false), 4000)
-    return () => clearTimeout(id)
-  }, [confirmingEnd])
-
   if (engine.finished) {
     return (
       <div className="session seg-done">
@@ -61,10 +55,6 @@ export function SessionScreen(props: Props) {
   const totalPct = (engine.elapsedSeconds / engine.totalSeconds) * 100
 
   const handleEnd = () => {
-    if (!confirmingEnd) {
-      setConfirmingEnd(true)
-      return
-    }
     engine.abort()
     onExit()
   }
@@ -111,18 +101,33 @@ export function SessionScreen(props: Props) {
         </div>
 
         <div className="session-controls">
-          <button className="btn btn-ghost" onClick={handleEnd}>
-            {confirmingEnd ? strings.confirmEnd : strings.endSession}
-          </button>
-          <button
-            className="btn btn-primary btn-big"
-            onClick={engine.paused ? engine.resume : engine.pause}
-          >
-            {engine.paused ? `▶ ${strings.resume}` : `⏸ ${strings.pause}`}
-          </button>
-          <button className="btn btn-ghost" onClick={engine.skip}>
-            {strings.skip} ⏭
-          </button>
+          {engine.paused ? (
+            <button className="btn btn-primary btn-big" onClick={engine.resume}>
+              ▶ {strings.resume}
+            </button>
+          ) : (
+            <HoldButton
+              className="btn-primary btn-big"
+              label={`⏸ ${strings.pause}`}
+              holdingLabel={strings.holdHint}
+              onActivate={engine.pause}
+            />
+          )}
+          <div className="session-controls-row">
+            <HoldButton
+              className="btn-ghost"
+              label={strings.endSession}
+              holdingLabel={strings.holdHint}
+              onActivate={handleEnd}
+            />
+            <HoldButton
+              className="btn-ghost"
+              label={`${strings.skip} ⏭`}
+              holdingLabel={strings.holdHint}
+              onActivate={engine.skip}
+            />
+          </div>
+          <p className="hold-note">{strings.holdNote}</p>
         </div>
       </div>
     </div>

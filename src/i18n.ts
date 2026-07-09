@@ -7,6 +7,7 @@ const da = {
   tagline: 'Find din kadens',
   // Navigation
   navHome: 'Plan',
+  navAdvice: 'Råd',
   navHistory: 'Historik',
   navSettings: 'Indstillinger',
   // Home
@@ -35,6 +36,8 @@ const da = {
   resume: 'Fortsæt',
   skip: 'Spring over',
   endSession: 'Afslut',
+  holdHint: 'Hold inde…',
+  holdNote: 'Hold en knap inde i et øjeblik — så aktiverer den ikke ved uheld i lommen.',
   finished: 'Godt løbet!',
   finishedBody: 'Træningen er gennemført og gemt.',
   backToPlan: 'Tilbage til planen',
@@ -53,6 +56,49 @@ const da = {
     lastInterval: 'Sidste interval!',
     done: 'Flot klaret! Træningen er slut.',
   },
+  // Advice
+  adviceTitle: 'Råd om kost & væske',
+  adviceIntro:
+    'Gode vaner omkring mad og væske gør løbeturen lettere og restitutionen bedre. Det her er generelle råd — prøv dig frem, for alle maver er forskellige.',
+  adviceSections: [
+    {
+      icon: '🥣',
+      title: 'Før løbeturen',
+      items: [
+        'Spis et let måltid 1½–3 timer før — mest kulhydrater med lidt protein, fx havregrød, fuldkornsbrød eller en banan.',
+        'Undgå meget fed, stegt eller fiberrig mad lige før — det kan give ondt i maven.',
+        'Har du kun 30–60 min? Tag en lille snack: en banan, en håndfuld rosiner eller en dadel.',
+        'Løber du om morgenen, kan en kort tur sagtens klares på tom mave — mærk efter hvad der passer dig.',
+      ],
+    },
+    {
+      icon: '💧',
+      title: 'Væske',
+      items: [
+        'Drik 300–500 ml vand 1–2 timer før, så du starter veludhvilet og uden at skvulpe.',
+        'På ture under ca. 45–60 min er vand rigeligt — drik efter tørst, gerne små slurke.',
+        'Har du svedt meget, så tænk lidt salt ind bagefter (fx via maden) for at genoprette balancen.',
+      ],
+    },
+    {
+      icon: '🍽️',
+      title: 'Efter løbeturen',
+      items: [
+        'Drik vand, når du er færdig, for at fylde depoterne op igen.',
+        'Spis inden for 1–2 timer: kulhydrater + protein hjælper musklerne med at restituere — fx skyr med frugt, æg og brød, eller kylling og ris.',
+        'En god nats søvn er en af de vigtigste dele af træningen.',
+      ],
+    },
+    {
+      icon: '⭐',
+      title: 'Tommelfingerregler',
+      items: [
+        'Prøv aldrig helt ny mad før en vigtig tur — test det på de rolige dage.',
+        'Løber du dårligt eller får ondt i maven, så juster timing og mængde næste gang.',
+        'Er du i tvivl om kost i forhold til sygdom eller medicin, så tal med din læge.',
+      ],
+    },
+  ],
   // History
   historyTitle: 'Historik',
   historyEmpty: 'Ingen gennemførte træninger endnu. Kom afsted! 👟',

@@ -16,8 +16,9 @@ import { SessionScreen } from './components/Session'
 import { History } from './components/History'
 import { SettingsScreen } from './components/Settings'
 import { InstallBanner } from './components/InstallBanner'
+import { Advice } from './components/Advice'
 
-type View = 'home' | 'history' | 'settings'
+type View = 'home' | 'advice' | 'history' | 'settings'
 
 interface RunningSession {
   session: SessionDef
@@ -118,6 +119,7 @@ export default function App() {
             onStart={startSession}
           />
         )}
+        {view === 'advice' && <Advice strings={strings} />}
         {view === 'history' && <History completed={completed} strings={strings} />}
         {view === 'settings' && (
           <SettingsScreen
@@ -135,6 +137,13 @@ export default function App() {
         <button className={view === 'home' ? 'tab active' : 'tab'} onClick={() => setView('home')}>
           <span className="tab-icon">🏃</span>
           {strings.navHome}
+        </button>
+        <button
+          className={view === 'advice' ? 'tab active' : 'tab'}
+          onClick={() => setView('advice')}
+        >
+          <span className="tab-icon">🥗</span>
+          {strings.navAdvice}
         </button>
         <button
           className={view === 'history' ? 'tab active' : 'tab'}
