@@ -106,6 +106,10 @@ const da = {
   settingsTitle: 'Indstillinger',
   beeps: 'Bip-lyde',
   speechSetting: 'Talte beskeder',
+  holdDuration: 'Hold-tid for knapper',
+  holdDurationHint:
+    'Hvor længe knapperne under en træning skal holdes inde, før de aktiverer. Længere tid = mindre risiko for tryk ved uheld.',
+  holdSeconds: (s: string) => `${s} sek.`,
   dataTitle: 'Dine data',
   exportBtn: 'Eksportér data',
   importBtn: 'Importér data',

@@ -529,6 +529,25 @@ button {
   accent-color: var(--accent);
 }
 
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.slider-header strong {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.slider {
+  width: 100%;
+  accent-color: var(--accent);
+  height: 24px;
+}
+
 .hint {
   color: var(--muted);
   font-size: 0.82rem;

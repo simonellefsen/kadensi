@@ -110,6 +110,7 @@ export function SessionScreen(props: Props) {
               className="btn-primary btn-big"
               label={`⏸ ${strings.pause}`}
               holdingLabel={strings.holdHint}
+              holdMs={settings.holdMs}
               onActivate={engine.pause}
             />
           )}
@@ -118,12 +119,14 @@ export function SessionScreen(props: Props) {
               className="btn-ghost"
               label={strings.endSession}
               holdingLabel={strings.holdHint}
+              holdMs={settings.holdMs}
               onActivate={handleEnd}
             />
             <HoldButton
               className="btn-ghost"
               label={`${strings.skip} ⏭`}
               holdingLabel={strings.holdHint}
+              holdMs={settings.holdMs}
               onActivate={engine.skip}
             />
           </div>

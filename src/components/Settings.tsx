@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import type { Settings } from '../store'
-import { exportData, importData, resetProgress } from '../store'
+import { HOLD_MS_MAX, HOLD_MS_MIN, exportData, importData, resetProgress } from '../store'
 import type { Strings } from '../i18n'
 
 interface Props {
@@ -68,6 +68,23 @@ export function SettingsScreen({ settings, strings, onChange, onDataChanged }: P
           />
         </label>
         <p className="hint">{strings.silentHint}</p>
+      </section>
+
+      <section className="card">
+        <div className="slider-header">
+          <span>{strings.holdDuration}</span>
+          <strong>{strings.holdSeconds((settings.holdMs / 1000).toFixed(2).replace('.', ','))}</strong>
+        </div>
+        <input
+          className="slider"
+          type="range"
+          min={HOLD_MS_MIN}
+          max={HOLD_MS_MAX}
+          step={50}
+          value={settings.holdMs}
+          onChange={(e) => onChange({ ...settings, holdMs: Number(e.target.value) })}
+        />
+        <p className="hint">{strings.holdDurationHint}</p>
       </section>
 
       <section className="card">

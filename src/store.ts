@@ -8,6 +8,8 @@ export interface Settings {
   beeps: boolean
   speech: boolean
   language: 'da'
+  /** How long the in-session control buttons must be held before they fire, in ms */
+  holdMs: number
 }
 
 export interface ActiveSessionSnapshot {
@@ -46,7 +48,16 @@ function write(key: string, value: unknown): void {
   }
 }
 
-export const DEFAULT_SETTINGS: Settings = { beeps: true, speech: true, language: 'da' }
+export const HOLD_MS_MIN = 300
+export const HOLD_MS_MAX = 1500
+export const HOLD_MS_DEFAULT = 650
+
+export const DEFAULT_SETTINGS: Settings = {
+  beeps: true,
+  speech: true,
+  language: 'da',
+  holdMs: HOLD_MS_DEFAULT,
+}
 
 export function loadCompleted(): CompletedSession[] {
   return read<CompletedSession[]>(KEYS.completed) ?? []
