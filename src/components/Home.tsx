@@ -19,9 +19,13 @@ export function Home({ completed, completedIds, strings, onStart }: Props) {
   return (
     <div className="home">
       <header className="app-header">
-        <h1 className="brand">
-          <span className="brand-name">{strings.appName.slice(0, -1)}</span>
-          <span className="brand-i">{strings.appName.slice(-1)}</span>
+        <h1 className="brand" aria-label={strings.appName}>
+          <span className="brand-name" aria-hidden="true">
+            {strings.appName.slice(0, -1)}
+          </span>
+          <span className="brand-i" aria-hidden="true">
+            <img src="/brand-runner-i-v2.png" alt="" />
+          </span>
         </h1>
         <p className="tagline">{strings.tagline}</p>
       </header>
