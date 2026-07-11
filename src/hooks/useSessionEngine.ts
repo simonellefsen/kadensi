@@ -38,10 +38,16 @@ export function useSessionEngine(session: SessionDef, opts: Options) {
 
   const startedAtRef = useRef<string>(snapshot?.startedAt ?? new Date().toISOString())
   const settingsRef = useRef(settings)
-  settingsRef.current = settings
   const onFinishedRef = useRef(onFinished)
-  onFinishedRef.current = onFinished
   const lastCountdownSecondRef = useRef<number>(-1)
+
+  useEffect(() => {
+    settingsRef.current = settings
+  }, [settings])
+
+  useEffect(() => {
+    onFinishedRef.current = onFinished
+  }, [onFinished])
 
   const [state, setState] = useState<EngineState>(() => {
     if (snapshot && snapshot.sessionId === session.id) {
@@ -65,7 +71,10 @@ export function useSessionEngine(session: SessionDef, opts: Options) {
   // Absolute end time of the current segment while running; null while paused
   const endsAtRef = useRef<number | null>(null)
   const stateRef = useRef(state)
-  stateRef.current = state
+
+  useEffect(() => {
+    stateRef.current = state
+  }, [state])
 
   const persist = useCallback(
     (s: EngineState) => {
@@ -91,12 +100,12 @@ export function useSessionEngine(session: SessionDef, opts: Options) {
   useEffect(() => {
     if (initialisedRef.current) return
     initialisedRef.current = true
-    const s = stateRef.current
+    const s = state
     if (!s.paused) {
       endsAtRef.current = Date.now() + s.remainingMs
       if (!snapshot) cueSegment(segments[0].type, settingsRef.current)
     }
-    persist(stateRef.current)
+    persist(s)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

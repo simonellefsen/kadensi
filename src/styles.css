@@ -69,6 +69,25 @@ button {
   letter-spacing: -0.02em;
 }
 
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.brand-name {
+  font-weight: 800;
+}
+
+.brand-i {
+  font-family: Didot, 'Bodoni MT', 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  font-size: 1.7em;
+  line-height: 1;
+  color: var(--accent);
+  margin-left: 0.03em;
+  transform: translateY(0.06em);
+}
+
 .tagline {
   color: var(--accent);
   font-weight: 600;

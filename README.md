@@ -1,4 +1,4 @@
-# Kadens 🏃
+# KadensI 🏃
 
 **Find din kadens** — a Danish-language PWA running coach that takes you from beginner to 3 km, then on to 5 km, with timed run/walk intervals (Couch-to-5K style).
 
@@ -15,7 +15,10 @@
 ```sh
 npm install
 npm run dev        # dev server
+npm run lint       # static checks
+npm test           # unit tests
 npm run build      # type-check + production build (dist/)
+npm run check      # lint + tests + production build
 npm run preview    # serve the production build
 ```
 
@@ -24,6 +27,12 @@ Append `?demo=1` to the URL to compress every segment to ~5 seconds for quick te
 ## Deployment
 
 Static Vite app — push to `main` and let Vercel auto-build (framework preset: Vite, output `dist/`).
+
+## Project wiki
+
+The source-driven, LLM-maintained project wiki lives in [wiki/index.md](wiki/index.md).
+It records the current architecture, roadmap, source notes, and release runbook;
+follow [wiki/schema.md](wiki/schema.md) when maintaining it.
 
 ## Notes for iOS
 

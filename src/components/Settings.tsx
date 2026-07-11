@@ -20,7 +20,7 @@ export function SettingsScreen({ settings, strings, onChange, onDataChanged }: P
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `kadens-backup-${new Date().toISOString().slice(0, 10)}.json`
+    a.download = `kadensi-backup-${new Date().toISOString().slice(0, 10)}.json`
     a.click()
     URL.revokeObjectURL(url)
   }

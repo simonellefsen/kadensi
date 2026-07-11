@@ -1,12 +1,12 @@
-# Kadens — PWA running coach (3 km → 5 km)
+# KadensI — PWA running coach (3 km → 5 km)
 
 ## Context
 
 Simon wants a browser-based running coach to take him from beginner to 3 km, then on to 5 km, used on his iPhone. It guides each workout with timed run/walk intervals (Couch-to-5K style), speaks/beeps the transitions, stores all progress locally on the device (web storage), and installs to the iOS home screen as a PWA. UI is Danish, structured so more languages can be added later.
 
-- **Project folder:** `/Users/lindau/codex/kadens` (empty git repo, remote `github.com/simonellefsen/kadens`, branch `main`)
+- **Project folder:** `/Users/lindau/codex/kadensi` (git repo, remote `github.com/simonellefsen/kadensi`, branch `main`)
 - **Deployment:** Simon connects Vercel to the repo — every push to `main` auto-builds and deploys to a `*.vercel.app` domain (HTTPS, required for PWA install)
-- **Decisions made:** name **Kadens** ("Find din kadens"), timer + cues only (no GPS for now), beeps + spoken cues, Danish UI
+- **Decisions made:** name **KadensI** ("Find din kadens"), timer + cues only (no GPS for now), beeps + spoken cues, Danish UI
 
 ## Stack
 
@@ -43,12 +43,12 @@ Simon wants a browser-based running coach to take him from beginner to 3 km, the
 - **Wake Lock API** (`src/hooks/useWakeLock.ts`): keep screen on during a session (iOS Safari ≥ 16.4); re-acquire on `visibilitychange`.
 - **Audio** (`src/audio.ts`): `AudioContext` unlocked in the Start-button tap handler (iOS requires a user gesture). Distinct oscillator beep patterns for run vs walk, plus `speechSynthesis` with a `da-DK` voice ("Løb nu!", "Gå nu", "Halvvejs!", "Sidste interval!"). Caveat surfaced in UI: silent switch mutes audio; screen colors always work.
 - **Install prompt** (`src/components/InstallBanner.tsx`): iOS has no `beforeinstallprompt`, so detect iOS Safari + not-standalone (`display-mode: standalone` / `navigator.standalone`) and show a dismissible banner with "Tryk Del ⎋ → Føj til hjemmeskærm". On Android/desktop, hook the real `beforeinstallprompt` event.
-- **Manifest/icons:** name Kadens, `display: standalone`, theme colors; simple "K + pulse" logo as SVG rendered to 192/512/maskable PNGs + 180 px `apple-touch-icon`. Installed home-screen apps are exempt from Safari's 7-day storage eviction — one more reason the install banner matters.
+- **Manifest/icons:** name KadensI, `display: standalone`, theme colors; simple "K + pulse" logo as SVG rendered to 192/512/maskable PNGs + 180 px `apple-touch-icon`. Installed home-screen apps are exempt from Safari's 7-day storage eviction — one more reason the install banner matters.
 
 ## File structure
 
 ```
-kadens/
+kadensi/
 ├─ index.html · vite.config.ts · tsconfig.json · package.json · .gitignore
 ├─ public/            icons (192/512/maskable/apple-touch-icon)
 └─ src/

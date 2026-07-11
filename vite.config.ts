@@ -9,8 +9,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['apple-touch-icon.png'],
       manifest: {
-        name: 'Kadens',
-        short_name: 'Kadens',
+        name: 'KadensI',
+        short_name: 'KadensI',
         description: 'Find din kadens — din personlige løbecoach fra 0 til 5 km',
         lang: 'da',
         display: 'standalone',

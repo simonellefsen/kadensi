@@ -3,11 +3,11 @@ import type { SegmentType } from './program'
 export type Language = 'da'
 
 const da = {
-  appName: 'Kadens',
+  appName: 'KadensI',
   tagline: 'Find din kadens',
   // Share
-  shareTitle: 'Kadens',
-  shareText: 'Kadens hjælper dig i gang med at løbe — fra 0 til 5 km. Prøv den!',
+  shareTitle: 'KadensI',
+  shareText: 'KadensI hjælper dig i gang med at løbe — fra 0 til 5 km. Prøv den!',
   shareCopied: 'Link kopieret!',
   shareFailed: 'Kunne ikke dele.',
   // Navigation
@@ -122,9 +122,9 @@ const da = {
   importError: 'Kunne ikke importere filen.',
   resetBtn: 'Nulstil fremskridt',
   confirmReset: 'Er du sikker? Alle gennemførte træninger slettes.',
-  about: 'Kadens gemmer alt lokalt på din telefon — ingen konto, ingen sky.',
+  about: 'KadensI gemmer alt lokalt på din telefon — ingen konto, ingen sky.',
   // Install banner
-  installTitle: 'Føj Kadens til hjemmeskærmen',
+  installTitle: 'Føj KadensI til hjemmeskærmen',
   installBodyIos: 'Tryk på Del-knappen og vælg “Føj til hjemmeskærm”. Så virker appen offline og gemmer dine data sikkert.',
   installBodyOther: 'Installér appen, så den virker offline og åbner som en rigtig app.',
   installBtn: 'Installér',
