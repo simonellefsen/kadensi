@@ -5,6 +5,11 @@ export type Language = 'da'
 const da = {
   appName: 'Kadens',
   tagline: 'Find din kadens',
+  // Share
+  shareTitle: 'Kadens',
+  shareText: 'Kadens hjælper dig i gang med at løbe — fra 0 til 5 km. Prøv den!',
+  shareCopied: 'Link kopieret!',
+  shareFailed: 'Kunne ikke dele.',
   // Navigation
   navHome: 'Plan',
   navAdvice: 'Råd',

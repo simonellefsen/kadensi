@@ -17,6 +17,7 @@ import { History } from './components/History'
 import { SettingsScreen } from './components/Settings'
 import { InstallBanner } from './components/InstallBanner'
 import { Advice } from './components/Advice'
+import { ShareButton } from './components/ShareButton'
 
 type View = 'home' | 'advice' | 'history' | 'settings'
 
@@ -96,6 +97,8 @@ export default function App() {
 
   return (
     <div className="app">
+      <ShareButton strings={strings} />
+
       {pendingResume && (
         <div className="resume-banner card">
           <p>{strings.resumePrompt}</p>
