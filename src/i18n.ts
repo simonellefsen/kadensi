@@ -122,10 +122,11 @@ const da = {
   importError: 'Kunne ikke importere filen.',
   resetBtn: 'Nulstil fremskridt',
   confirmReset: 'Er du sikker? Alle gennemførte træninger slettes.',
-  about: 'KadensI gemmer alt lokalt på din telefon — ingen konto, ingen sky.',
+  about: 'gemmer alt lokalt på din telefon — ingen konto, ingen sky.',
   // Install banner
-  installTitle: 'Føj KadensI til hjemmeskærmen',
-  installBodyIos: 'Tryk på Del-knappen og vælg “Føj til hjemmeskærm”. Så virker appen offline og gemmer dine data sikkert.',
+  installTitle: ' til hjemmeskærmen',
+  installBodyIos:
+    'Åbn siden i Safari. Tryk på Del-knappen, rul ned og vælg “Føj til hjemmeskærm”. Hvis punktet mangler, tryk “Rediger handlinger” nederst og slå det til. Så virker appen offline og gemmer dine data sikkert.',
   installBodyOther: 'Installér appen, så den virker offline og åbner som en rigtig app.',
   installBtn: 'Installér',
   installDismiss: 'Ikke nu',

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { Strings } from '../i18n'
 import { loadInstallDismissed, saveInstallDismissed } from '../store'
+import { BrandName } from './BrandName'
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>
@@ -45,7 +46,9 @@ export function InstallBanner({ strings }: { strings: Strings }) {
 
   return (
     <div className="install-banner card">
-      <strong>{strings.installTitle}</strong>
+      <strong className="install-title">
+        <BrandName appName={strings.appName} />{strings.installTitle}
+      </strong>
       <p>{ios ? strings.installBodyIos : strings.installBodyOther}</p>
       <div className="row">
         {!ios && installEvent && (

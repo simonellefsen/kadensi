@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import type { Settings } from '../store'
 import { HOLD_MS_MAX, HOLD_MS_MIN, exportData, importData, resetProgress } from '../store'
 import type { Strings } from '../i18n'
+import { BrandName } from './BrandName'
 
 interface Props {
   settings: Settings
@@ -114,7 +115,9 @@ export function SettingsScreen({ settings, strings, onChange, onDataChanged }: P
         </button>
       </section>
 
-      <p className="about">{strings.about}</p>
+      <p className="about">
+        <BrandName appName={strings.appName} /> {strings.about}
+      </p>
     </div>
   )
 }
