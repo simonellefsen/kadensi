@@ -124,6 +124,7 @@ const da = {
   confirmReset: 'Er du sikker? Alle gennemførte træninger slettes.',
   about: 'gemmer alt lokalt på din telefon — ingen konto, ingen sky.',
   // Install banner
+  installLead: 'Føj ',
   installTitle: ' til hjemmeskærmen',
   installBodyIos:
     'Åbn siden i Safari. Tryk på Del-knappen, rul ned og vælg “Føj til hjemmeskærm”. Hvis punktet mangler, tryk “Rediger handlinger” nederst og slå det til. Så virker appen offline og gemmer dine data sikkert.',

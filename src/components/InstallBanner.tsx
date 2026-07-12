@@ -47,7 +47,9 @@ export function InstallBanner({ strings }: { strings: Strings }) {
   return (
     <div className="install-banner card">
       <strong className="install-title">
-        <BrandName appName={strings.appName} />{strings.installTitle}
+        {strings.installLead}
+        <BrandName appName={strings.appName} />
+        {strings.installTitle}
       </strong>
       <p>{ios ? strings.installBodyIos : strings.installBodyOther}</p>
       <div className="row">
