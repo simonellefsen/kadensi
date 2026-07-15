@@ -123,7 +123,9 @@ export default function App() {
           />
         )}
         {view === 'advice' && <Advice strings={strings} />}
-        {view === 'history' && <History completed={completed} strings={strings} />}
+        {view === 'history' && (
+          <History completed={completed} strings={strings} language={settings.language} />
+        )}
         {view === 'settings' && (
           <SettingsScreen
             settings={settings}

@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import type { Settings } from '../store'
 import { HOLD_MS_MAX, HOLD_MS_MIN, exportData, importData, resetProgress } from '../store'
 import type { Strings } from '../i18n'
+import { LANGUAGES } from '../i18n'
 import { BrandName } from './BrandName'
 
 interface Props {
@@ -45,11 +46,32 @@ export function SettingsScreen({ settings, strings, onChange, onDataChanged }: P
     onDataChanged()
   }
 
+  const holdSecondsRaw = (settings.holdMs / 1000).toFixed(2)
+  const holdSecondsDisplay =
+    settings.language === 'da' ? holdSecondsRaw.replace('.', ',') : holdSecondsRaw
+
   return (
     <div className="settings">
       <header className="app-header">
         <h1>{strings.settingsTitle}</h1>
       </header>
+
+      <section className="card">
+        <div className="slider-header">
+          <span>{strings.languageSetting}</span>
+        </div>
+        <div className="row">
+          {LANGUAGES.map((l) => (
+            <button
+              key={l.code}
+              className={'btn ' + (settings.language === l.code ? 'btn-primary' : 'btn-secondary')}
+              onClick={() => onChange({ ...settings, language: l.code })}
+            >
+              {l.label}
+            </button>
+          ))}
+        </div>
+      </section>
 
       <section className="card">
         <label className="toggle-row">
@@ -74,7 +96,7 @@ export function SettingsScreen({ settings, strings, onChange, onDataChanged }: P
       <section className="card">
         <div className="slider-header">
           <span>{strings.holdDuration}</span>
-          <strong>{strings.holdSeconds((settings.holdMs / 1000).toFixed(2).replace('.', ','))}</strong>
+          <strong>{strings.holdSeconds(holdSecondsDisplay)}</strong>
         </div>
         <input
           className="slider"

@@ -1,13 +1,14 @@
 import type { CompletedSession } from '../store'
-import type { Strings } from '../i18n'
+import type { Language, Strings } from '../i18n'
 import { formatDate, formatDuration } from '../i18n'
 
 interface Props {
   completed: CompletedSession[]
   strings: Strings
+  language: Language
 }
 
-export function History({ completed, strings }: Props) {
+export function History({ completed, strings, language }: Props) {
   const items = [...completed].reverse()
   return (
     <div className="history">
@@ -26,7 +27,7 @@ export function History({ completed, strings }: Props) {
                   <strong>
                     {strings.week} {week} · {strings.session} {index}
                   </strong>
-                  <span className="history-date">{formatDate(c.completedAt)}</span>
+                  <span className="history-date">{formatDate(c.completedAt, language)}</span>
                 </div>
                 <span className="history-duration">{formatDuration(c.durationSeconds)}</span>
               </li>

@@ -1,3 +1,5 @@
+import { detectLanguage, type Language } from './i18n'
+
 export interface CompletedSession {
   id: string
   completedAt: string // ISO date-time
@@ -7,7 +9,7 @@ export interface CompletedSession {
 export interface Settings {
   beeps: boolean
   speech: boolean
-  language: 'da'
+  language: Language
   /** How long the in-session control buttons must be held before they fire, in ms */
   holdMs: number
 }
@@ -55,7 +57,7 @@ export const HOLD_MS_DEFAULT = 650
 export const DEFAULT_SETTINGS: Settings = {
   beeps: true,
   speech: true,
-  language: 'da',
+  language: detectLanguage(),
   holdMs: HOLD_MS_DEFAULT,
 }
 

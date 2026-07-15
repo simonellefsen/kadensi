@@ -32,7 +32,7 @@ export function Home({ completed, completedIds, strings, onStart }: Props) {
           <h2>
             {strings.week} {next.week} · {strings.session} {next.index}
           </h2>
-          <p className="hero-desc">{PROGRAM[next.week - 1].label}</p>
+          <p className="hero-desc">{strings.weekLabels[next.week - 1]}</p>
           <div className="hero-stats">
             <span>
               {strings.totalTime}: <strong>{formatDuration(sessionDuration(next))}</strong>
@@ -81,7 +81,7 @@ export function Home({ completed, completedIds, strings, onStart }: Props) {
                   {done}/{week.sessions.length}
                 </span>
               </div>
-              <p className="week-label">{week.label}</p>
+              <p className="week-label">{strings.weekLabels[week.week - 1]}</p>
               <div className="week-sessions">
                 {week.sessions.map((s) => {
                   const isDone = completedIds.has(s.id)

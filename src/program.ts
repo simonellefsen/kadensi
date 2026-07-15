@@ -15,8 +15,6 @@ export interface SessionDef {
 
 export interface WeekDef {
   week: number
-  /** Short Danish description of the interval scheme */
-  label: string
   /** Milestone reached by completing this week, if any */
   milestone?: '3km' | '5km'
   sessions: SessionDef[]
@@ -44,7 +42,6 @@ function wrap(intervals: Segment[]): Segment[] {
 }
 
 interface WeekSpec {
-  label: string
   milestone?: '3km' | '5km'
   /** One entry per session; identical sessions can share a builder */
   sessions: Segment[][]
@@ -52,24 +49,25 @@ interface WeekSpec {
 
 const triple = (intervals: Segment[]): Segment[][] => [intervals, intervals, intervals]
 
+/**
+ * Displayed week descriptions (translated per locale) live in `i18n.ts`'s
+ * `weekLabels`, in the same order as this array.
+ */
 const WEEK_SPECS: WeekSpec[] = [
-  { label: '8 × (1 min løb / 1½ min gå)', sessions: triple(reps(8, MIN, 1.5 * MIN)) },
-  { label: '6 × (1½ min løb / 2 min gå)', sessions: triple(reps(6, 1.5 * MIN, 2 * MIN)) },
+  { sessions: triple(reps(8, MIN, 1.5 * MIN)) },
+  { sessions: triple(reps(6, 1.5 * MIN, 2 * MIN)) },
   {
-    label: '2 × (1½ min løb, 1½ min gå, 3 min løb, 3 min gå)',
     sessions: triple([
       R(1.5 * MIN), G(1.5 * MIN), R(3 * MIN), G(3 * MIN),
       R(1.5 * MIN), G(1.5 * MIN), R(3 * MIN), G(3 * MIN),
     ]),
   },
   {
-    label: '3 min løb, 5 min løb, 3 min løb, 5 min løb — korte gåpauser',
     sessions: triple([
       R(3 * MIN), G(1.5 * MIN), R(5 * MIN), G(2.5 * MIN), R(3 * MIN), G(1.5 * MIN), R(5 * MIN),
     ]),
   },
   {
-    label: 'Længere løb: 5-5-5 · 8-8 · 20 min',
     sessions: [
       [R(5 * MIN), G(3 * MIN), R(5 * MIN), G(3 * MIN), R(5 * MIN)],
       [R(8 * MIN), G(5 * MIN), R(8 * MIN)],
@@ -77,7 +75,6 @@ const WEEK_SPECS: WeekSpec[] = [
     ],
   },
   {
-    label: 'Næsten i mål: 5-8-5 · 10-10 · 25 min = 3 km!',
     milestone: '3km',
     sessions: [
       [R(5 * MIN), G(3 * MIN), R(8 * MIN), G(3 * MIN), R(5 * MIN)],
@@ -85,11 +82,10 @@ const WEEK_SPECS: WeekSpec[] = [
       [R(25 * MIN)],
     ],
   },
-  { label: '25 min kontinuerligt løb', sessions: triple([R(25 * MIN)]) },
-  { label: '28 min kontinuerligt løb', sessions: triple([R(28 * MIN)]) },
-  { label: '30 min kontinuerligt løb', sessions: triple([R(30 * MIN)]) },
+  { sessions: triple([R(25 * MIN)]) },
+  { sessions: triple([R(28 * MIN)]) },
+  { sessions: triple([R(30 * MIN)]) },
   {
-    label: '30-32-35 min løb = 5 km!',
     milestone: '5km',
     sessions: [[R(30 * MIN)], [R(32 * MIN)], [R(35 * MIN)]],
   },
@@ -99,7 +95,6 @@ export const PROGRAM: WeekDef[] = WEEK_SPECS.map((spec, wi) => {
   const week = wi + 1
   return {
     week,
-    label: spec.label,
     milestone: spec.milestone,
     sessions: spec.sessions.map((intervals, si) => ({
       id: `${week}-${si + 1}`,
