@@ -26,6 +26,9 @@ product direction, device validation, or maintenance work.
 
 - [sources/llm-wiki](sources/llm-wiki.md) — source note for Andrej Karpathy's
   LLM-wiki pattern, and how it applies to KadensI.
+- [sources/device-test-2026-07-15-iphone17pro](sources/device-test-2026-07-15-iphone17pro.md)
+  — real-iPhone release-pass result (iPhone 17 Pro, iOS 26.5.2), steps 1–7
+  confirmed passing.
 
 ## Runbooks
 

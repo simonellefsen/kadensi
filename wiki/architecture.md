@@ -4,12 +4,13 @@ tags:
   - kadensi/pwa
   - react
   - local-first
-updated: 2026-07-11
+updated: 2026-07-15
 sources:
   - src/App.tsx
   - src/hooks/useSessionEngine.ts
   - src/store.ts
   - vite.config.ts
+  - wiki/sources/device-test-2026-07-15-iphone17pro.md
 ---
 
 # Architecture
@@ -91,3 +92,8 @@ features require HTTPS.
 
 The quality gate is `npm run check`: ESLint, Vitest programme/formatting tests,
 TypeScript checking, and the production PWA build.
+
+Verified on a real device: install, offline relaunch, audio/wake-lock during a
+session, reload recovery, and export/reset/import all pass on an iPhone 17
+Pro running iOS 26.5.2 — see the
+[device-test source note](sources/device-test-2026-07-15-iphone17pro.md).

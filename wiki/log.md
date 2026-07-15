@@ -3,7 +3,7 @@ type: wiki-log
 tags:
   - kadensi/wiki
   - maintained-by-llm
-updated: 2026-07-13
+updated: 2026-07-15
 ---
 
 # Wiki log
@@ -59,3 +59,14 @@ Append-only timeline for project-wiki maintenance. Use headings in the format
   restores the working one from `globalThis.jsdom`.
 - Remaining P0 item — the real-iPhone release pass — was handed to Simon as a
   checklist; it requires a physical device and cannot be run by an agent.
+
+## [2026-07-15] device-test | Real-iPhone release pass — P0 complete
+
+- Simon ran the release-pass checklist on an iPhone 17 Pro (iOS 26.5.2) and
+  confirmed steps 1–7 pass with no issues reported: install, offline relaunch,
+  audio/wake-lock during a session, reload recovery, and export/reset/import.
+  Captured as [a source note](sources/device-test-2026-07-15-iphone17pro.md);
+  synthesised into [architecture](architecture.md) and
+  [roadmap](roadmap.md), which now marks all three P0 items landed.
+- This is a single device/OS data point, not a full release matrix — the
+  roadmap's open question on supported iOS versions/devices stays open.
