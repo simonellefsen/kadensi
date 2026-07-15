@@ -121,6 +121,9 @@ export function useSessionEngine(session: SessionDef, opts: Options) {
 
   const advance = useCallback(
     (fromState: EngineState, overshootMs: number): EngineState => {
+      // A burst of redundant overdue ticks (e.g. after the browser coalesces
+      // throttled intervals) must never re-fire completion once finished.
+      if (fromState.finished) return fromState
       let idx = fromState.segmentIndex
       let carry = overshootMs
       while (true) {

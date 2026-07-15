@@ -1,4 +1,5 @@
-import { detectLanguage, type Language } from './i18n'
+import { detectLanguage, LANGUAGES, type Language } from './i18n'
+import { sessionById } from './program'
 
 export interface CompletedSession {
   id: string
@@ -111,16 +112,60 @@ export function exportData(): string {
   return JSON.stringify(data, null, 2)
 }
 
-export function importData(json: string): { ok: true } | { ok: false; error: string } {
+const KNOWN_LANGUAGES = new Set<string>(LANGUAGES.map((l) => l.code))
+
+function isValidCompletedSession(value: unknown): value is CompletedSession {
+  if (typeof value !== 'object' || value === null) return false
+  const v = value as Record<string, unknown>
+  if (typeof v.id !== 'string' || !sessionById(v.id)) return false
+  if (typeof v.completedAt !== 'string' || Number.isNaN(Date.parse(v.completedAt))) return false
+  if (typeof v.durationSeconds !== 'number' || !Number.isFinite(v.durationSeconds) || v.durationSeconds < 0) {
+    return false
+  }
+  return true
+}
+
+function isValidSettingsPatch(value: unknown): value is Partial<Settings> {
+  if (typeof value !== 'object' || value === null) return false
+  const v = value as Record<string, unknown>
+  if ('beeps' in v && typeof v.beeps !== 'boolean') return false
+  if ('speech' in v && typeof v.speech !== 'boolean') return false
+  if ('language' in v && !KNOWN_LANGUAGES.has(v.language as string)) return false
+  if ('holdMs' in v) {
+    const h = v.holdMs
+    if (typeof h !== 'number' || !Number.isFinite(h) || h < HOLD_MS_MIN || h > HOLD_MS_MAX) return false
+  }
+  return true
+}
+
+export type ImportError = 'parse' | 'version' | 'completed' | 'settings'
+
+/**
+ * Validates the entire file before writing anything, so a malformed,
+ * incompatible, or hand-edited backup can never partially overwrite
+ * existing progress.
+ */
+export function importData(json: string): { ok: true } | { ok: false; error: ImportError } {
+  let data: unknown
   try {
-    const data = JSON.parse(json) as Partial<ExportData>
-    if (!Array.isArray(data.completed)) return { ok: false, error: 'invalid' }
-    saveCompleted(data.completed)
-    if (data.settings) saveSettings({ ...DEFAULT_SETTINGS, ...data.settings })
-    return { ok: true }
+    data = JSON.parse(json)
   } catch {
     return { ok: false, error: 'parse' }
   }
+  if (typeof data !== 'object' || data === null) return { ok: false, error: 'parse' }
+
+  const d = data as Record<string, unknown>
+  if (d.version !== 1) return { ok: false, error: 'version' }
+  if (!Array.isArray(d.completed) || !d.completed.every(isValidCompletedSession)) {
+    return { ok: false, error: 'completed' }
+  }
+  if (d.settings !== undefined && !isValidSettingsPatch(d.settings)) {
+    return { ok: false, error: 'settings' }
+  }
+
+  saveCompleted(d.completed)
+  if (d.settings) saveSettings({ ...DEFAULT_SETTINGS, ...(d.settings as Partial<Settings>) })
+  return { ok: true }
 }
 
 export function resetProgress(): void {
