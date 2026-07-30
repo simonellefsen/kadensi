@@ -3,12 +3,13 @@ type: roadmap
 tags:
   - kadensi/product
   - kadensi/pwa
-updated: 2026-07-15
+updated: 2026-07-30
 sources:
   - wiki/architecture.md
   - wiki/runbooks/build-test-release.md
   - wiki/log.md
   - wiki/sources/device-test-2026-07-15-iphone17pro.md
+  - wiki/sources/audio-follow-up-2026-07-30.md
 ---
 
 # Roadmap
@@ -30,6 +31,7 @@ explicit product decision changes that model.
 | Timer state-machine tests | Landed | [`useSessionEngine.test.ts`](/Users/lindau/codex/kadensi/src/hooks/useSessionEngine.test.ts); caught and fixed a real duplicate-`onFinished` bug. |
 | Safe import validation | Landed | [`store.ts`](/Users/lindau/codex/kadensi/src/store.ts) `importData`, [`store.test.ts`](/Users/lindau/codex/kadensi/src/store.test.ts). |
 | Real-iPhone release pass | Landed | [device-test source note](sources/device-test-2026-07-15-iphone17pro.md) — iPhone 17 Pro, iOS 26.5.2, steps 1–7 passing. |
+| User-gesture audio unlock for iOS | Landed, device recheck pending | [`src/App.tsx`](/Users/lindau/codex/kadensi/src/App.tsx) and [`src/App.test.tsx`](/Users/lindau/codex/kadensi/src/App.test.tsx); prompted by the [audio follow-up](sources/audio-follow-up-2026-07-30.md). |
 
 ## P0 — prove the core on target devices (complete)
 
@@ -48,6 +50,7 @@ All three P0 items are done as of 2026-07-15.
 | Interaction accessibility pass | Check keyboard operation, visible focus, accessible names, colour contrast, reduced motion, and a non-pointer route for hold controls. | Tested accessibility checklist and resolved findings. |
 | Service-worker update UX | Confirm updates do not surprise an active workout and communicate a safe refresh point. | Device test with a deployed update while installed. |
 | Programme data safeguards | Add invariant tests for durations, segment shapes, milestone placement, and migration rules for any future programme change. | Tests and a decision record before changing IDs or ordering. |
+| iPhone cue reliability recheck | On a real iPhone, verify first cue, repeated “Løb nu”/“Gå nu” transitions, reload/resume, and Low Power Mode after the user-gesture audio fix. | Recorded device-test source note with results and any remaining browser limits. |
 
 ## P2 — product improvements, only after P0/P1 evidence
 

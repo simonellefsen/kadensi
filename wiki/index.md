@@ -29,6 +29,9 @@ product direction, device validation, or maintenance work.
 - [sources/device-test-2026-07-15-iphone17pro](sources/device-test-2026-07-15-iphone17pro.md)
   — real-iPhone release-pass result (iPhone 17 Pro, iOS 26.5.2), steps 1–7
   confirmed passing.
+- [sources/audio-follow-up-2026-07-30](sources/audio-follow-up-2026-07-30.md)
+  — reported intermittent spoken-cue issue, its user-gesture fix, and the
+  remaining real-iPhone follow-up.
 
 ## Runbooks
 

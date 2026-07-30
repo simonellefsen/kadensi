@@ -4,13 +4,14 @@ tags:
   - kadensi/pwa
   - react
   - local-first
-updated: 2026-07-15
+updated: 2026-07-30
 sources:
   - src/App.tsx
   - src/hooks/useSessionEngine.ts
   - src/store.ts
   - vite.config.ts
   - wiki/sources/device-test-2026-07-15-iphone17pro.md
+  - wiki/sources/audio-follow-up-2026-07-30.md
 ---
 
 # Architecture
@@ -49,8 +50,10 @@ Vite/PWA build ──> static dist/ ──> Vercel
 
 1. The plan presents the first uncompleted session by default, while allowing
    the runner to select any session.
-2. Starting unlocks audio in the user gesture, clears stale resume data, and
-   mounts the full-screen session view.
+2. Starting or resuming synchronously unlocks audio in that control's user
+   gesture, clears stale resume data where appropriate, and mounts the
+   full-screen session view. This primes iOS Web Audio and speech synthesis
+   before the engine makes its first cue.
 3. The session engine derives segments from the programme. `?demo=1` caps each
    segment at five seconds for development verification.
 4. The active segment has an absolute end time. A 200 ms display tick calculates
@@ -94,6 +97,9 @@ The quality gate is `npm run check`: ESLint, Vitest programme/formatting tests,
 TypeScript checking, and the production PWA build.
 
 Verified on a real device: install, offline relaunch, audio/wake-lock during a
-session, reload recovery, and export/reset/import all pass on an iPhone 17
+session, reload recovery, and export/reset/import all passed on an iPhone 17
 Pro running iOS 26.5.2 — see the
 [device-test source note](sources/device-test-2026-07-15-iphone17pro.md).
+An intermittent spoken-cue report subsequently led to an explicit audio
+unlock in the Start/Resume controls; the focused real-device retest remains
+open — see the [audio follow-up source note](sources/audio-follow-up-2026-07-30.md).

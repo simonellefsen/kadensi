@@ -19,3 +19,21 @@ if (jsdomInstance) {
     configurable: true,
   })
 }
+
+// JSDOM does not provide this browser API, but the installation banner asks
+// about standalone display mode while rendering the app.
+if (!window.matchMedia) {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: () => ({
+      matches: false,
+      media: '',
+      onchange: null,
+      addEventListener: () => undefined,
+      removeEventListener: () => undefined,
+      addListener: () => undefined,
+      removeListener: () => undefined,
+      dispatchEvent: () => false,
+    }),
+  })
+}

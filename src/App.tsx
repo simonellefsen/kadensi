@@ -11,6 +11,7 @@ import {
   saveSettings,
 } from './store'
 import { t } from './i18n'
+import { unlockAudio } from './audio'
 import { Home } from './components/Home'
 import { SessionScreen } from './components/Session'
 import { History } from './components/History'
@@ -48,6 +49,9 @@ export default function App() {
   }, [])
 
   const startSession = useCallback((session: SessionDef) => {
+    // This runs synchronously inside the Start button's gesture. Safari/iOS
+    // otherwise may reject or delay both the first beep and spoken cue.
+    unlockAudio()
     setPendingResume(null)
     saveActiveSession(null)
     setRunning({ session, snapshot: null, demo: DEMO })
@@ -55,6 +59,9 @@ export default function App() {
 
   const resumeSession = useCallback(() => {
     if (!pendingResume) return
+    // Resuming is also a user gesture, so use it to re-authorise audio after
+    // a browser/app reload.
+    unlockAudio()
     const session = sessionById(pendingResume.sessionId)
     if (session) setRunning({ session, snapshot: pendingResume, demo: pendingResume.demo })
     setPendingResume(null)

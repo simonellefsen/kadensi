@@ -3,7 +3,7 @@ type: wiki-log
 tags:
   - kadensi/wiki
   - maintained-by-llm
-updated: 2026-07-15
+updated: 2026-07-30
 ---
 
 # Wiki log
@@ -70,3 +70,14 @@ Append-only timeline for project-wiki maintenance. Use headings in the format
   [roadmap](roadmap.md), which now marks all three P0 items landed.
 - This is a single device/OS data point, not a full release matrix — the
   roadmap's open question on supported iOS versions/devices stays open.
+
+## [2026-07-30] investigation | iPhone spoken-cue follow-up
+
+- Captured a report of intermittent missed “Gå nu”/“Løb nu” announcements and
+  traced it to the existing audio-unlock routine not being invoked by either
+  Start or Resume. The code now primes Web Audio and speech synthesis from
+  those user gestures and resumes synthesis before each new cue.
+- Added an app-level test for each entry path, updated architecture and roadmap
+  synthesis, and recorded the focused real-iPhone retest that remains needed.
+- Documented the boundary between the app's best-effort wake lock and iPhone
+  Guided Access for stopping accidental side-button locking.

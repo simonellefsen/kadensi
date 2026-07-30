@@ -4,6 +4,10 @@ import { t } from './i18n'
 
 let ctx: AudioContext | null = null
 
+function getSpeechSynthesis(): SpeechSynthesis | null {
+  return 'speechSynthesis' in window ? window.speechSynthesis : null
+}
+
 /**
  * Must be called from a user-gesture handler (the Start button) —
  * iOS refuses to start audio otherwise.
@@ -15,10 +19,13 @@ export function unlockAudio(): void {
   }
   if (ctx && ctx.state === 'suspended') void ctx.resume()
   // Prime speech synthesis with an empty utterance inside the gesture
-  if ('speechSynthesis' in window) {
+  const synthesis = getSpeechSynthesis()
+  if (synthesis) {
+    synthesis.cancel()
+    synthesis.resume()
     const u = new SpeechSynthesisUtterance('')
     u.volume = 0
-    window.speechSynthesis.speak(u)
+    synthesis.speak(u)
   }
 }
 
@@ -85,14 +92,18 @@ if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
 }
 
 export function speak(text: string): void {
-  if (!('speechSynthesis' in window)) return
+  const synthesis = getSpeechSynthesis()
+  if (!synthesis) return
   const u = new SpeechSynthesisUtterance(text)
   u.lang = 'da-DK'
   const voice = danishVoice()
   if (voice) u.voice = voice
   u.rate = 1.0
-  window.speechSynthesis.cancel()
-  window.speechSynthesis.speak(u)
+  // iOS can leave synthesis paused after the page has been backgrounded.
+  // Resume before replacing a stale announcement with the current cue.
+  synthesis.cancel()
+  synthesis.resume()
+  synthesis.speak(u)
 }
 
 export function cueSegment(type: SegmentType, settings: Settings): void {
